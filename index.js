@@ -6,9 +6,18 @@ const genHeaders = obj => Object.keys(obj)
 const genValues = obj => genHeaders(obj).map(key => obj[key])
 const genSheetData = ([head, ...tail]) => [genHeaders(head), genValues(head), ...tail.map(genValues)]
 
+const genColumns = () => {
+  let base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  let genLetter = ind => base.map(letter => base[ind] + letter)
+  let all = base.map((x, ind) => genLetter(ind)) 
+  let merged = base
+  let actuallyMerged = merged.concat.apply(merged, all) 
+  actuallyMerged.unshift('0')
+  return actuallyMerged
+}
 
 const defineRange = ({ values }) => {
-  const columnNames = '0ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+  const columnNames = genColumns()
   let startColumn = 'A'
   let startRow = 1
   let columns = values[0].length 
