@@ -36,12 +36,17 @@ process.on('auth', auth => {
   }).catch(console.log)
 })
 
-const logToSheets = (data) => {
+const crushRows = ([head, ...tail]) => tail
+  .map((values) => head
+    .map((key, ind) => ({ [key]: values[ind] }))
+    .reduce((a, b) => ({ ...a, ...b })))
+
+const jsToSheets = (data) => {
   process.resource = {
     values: genSheetData(data)
   }
   require('./auth')
 }
 
-module.exports = { logToSheets }
+module.exports = { jsToSheets }
 

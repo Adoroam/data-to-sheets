@@ -1,4 +1,4 @@
-const { logToSheets } = require('./index')
+const { jsToSheets } = require('./index')
 
 let testData = [
   { name: 'shifu', weapon: 'spear', type: 'melee' },
@@ -13,4 +13,4 @@ let testData = [
   { name: 'sirius', weapon: 'cardboard', type: 'support' }
 ]
 
-logToSheets(testData)
+jsToSheets(testData)
